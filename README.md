@@ -26,6 +26,6 @@ Configuración:
         5- Los microservicios vienen configurados para crear la estructura de la BD así como sus reglas de integridad (primary keys, constraints, etc)
         6- Para crear los JARs de ejecución entrar a cada uno de las carpetas de los modulos (3 microservicios, eureka y gateway) y construir los ejecutables con el comando de gradle "gradlew.bat clean build -x:test"
         7- Esto creara los JARs listos para ser ejecutados, el orden de ejecución es de la siguiente: 1 eureka, 2 microservicio clientes, 3 microservicio descuentos, 4 microservicio factuas y 5 gateway
-        8- Antes de usar, ejecute el archivo SQL dentro de la BD
+        8- Por último, ejecute los archivos SQL en la BD correspondiente de acuerdo a su nombre, esto con la finalidad de contar con algunos registros de prueba y sobre todo llenar los catalogos que son necesarios
        
 Una vez que todos los componentes estén en ejecución podrá lanzar peticiones HTTP a través de la utilería de Swagger, la ruta es http://localhost:8090/swagger-ui/index.html
