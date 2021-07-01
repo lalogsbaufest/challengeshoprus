@@ -1,4 +1,3 @@
-\connect db_microservicios_usuarios
 --
 -- TOC entry 3117 (class 0 OID 16419)
 -- Dependencies: 204
