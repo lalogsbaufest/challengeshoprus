@@ -2,8 +2,8 @@ package com.shoprus.microservicios.clientes.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.shoprus.microservicios.clientes.controllers.dtos.UsuarioDTO;
 import com.shoprus.microservicios.commons.clientes.models.entities.Usuario;
+import com.shoprus.microservicios.commons.controllers.dtos.UsuarioDTO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,14 @@
-package com.shoprus.microservicios.clientes.controllers;
+package com.shoprus.microservicios.controllers;
 
 import java.util.Optional;
 
-import com.shoprus.microservicios.clientes.services.ITipoUsuarioService;
-import com.shoprus.microservicios.clientes.services.impl.UsuarioServiceImpl;
-import com.shoprus.microservicios.commons.clientes.models.entities.TipoUsuario;
-import com.shoprus.microservicios.commons.clientes.models.entities.Usuario;
-import com.shoprus.microservicios.commons.controllers.dtos.UsuarioDTO;
-import com.shoprus.microservicios.commons.utils.IConstantes;
+import com.shoprus.microservicios.controllers.dtos.UsuarioDTO;
 import com.shoprus.microservicios.generics.controllers.GenericController;
+import com.shoprus.microservicios.models.entities.TipoUsuario;
+import com.shoprus.microservicios.models.entities.Usuario;
+import com.shoprus.microservicios.services.ITipoUsuarioService;
+import com.shoprus.microservicios.services.impl.UsuarioServiceImpl;
+import com.shoprus.microservicios.utils.IConstantes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,18 +17,40 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
+@RequestMapping("/clientes")
 public class UsuarioController extends GenericController<Usuario, UsuarioServiceImpl>{
 
     @Autowired
     ITipoUsuarioService serviceTipoUsuario;
 
-    @PostMapping("/")
+    @Override
+    @Operation(summary = "Listar todos los clientes")
+    @GetMapping
+    public ResponseEntity<Iterable<Usuario>> listar() {
+        
+        return super.listar();
+    }
+
+    @Override
+    @Operation(summary = "Busca un cliente por ID")
+    @GetMapping("/{idEntidad}")
+    public ResponseEntity<Usuario> detalles(@PathVariable(required = true, name = "idEntidad") Long id) {
+
+        return super.detalles(id);
+    }
+
+    @Operation(summary = "Registrar un Cliente")
+    @PostMapping
     public ResponseEntity<Usuario> crear (@RequestBody UsuarioDTO usuario) {
 
         var requestPrint = String.format(IConstantes.LOG_REQUEST, stringTool.objectToString(usuario));

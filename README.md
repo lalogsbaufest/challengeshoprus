@@ -1,31 +1,19 @@
 # ChallengeShopRUs
-Proyectps creados por Eduardo García Solis - Baufest
+Proyecto creados por Eduardo García Solis - Baufest
 
-Propuesta de solución a Challenge ShopRUs: La arquitectura de la aplicación está conformada por 6 componentes:
-        
-        1- Microservicio de clientes: Con el se puede crear usuarios y acceder al registro de usuarios. Usa la BD "db_microservicios_usuarios" y el esquema "clientes"
-        2- Microservicio de descuentos y productos: Con el se puede crear descuentos, ver detalle que descuentos aplican a un producto y listar los descuentos. Usa la BD "db_microservicios_usuarios" y el esquema "descuentos"
-        3- Microservicio de facturas: Con el se puede facturar (una orden de productos con el usuario que realiza la compra y obteniendo total con y sin descuento). Usa la BD "db_microservicios_facturas" y el esquema "facturas"
-        4- Servidor Eureka: Discovery Server que habilita la registro de N cantidad de instancias de los microservicios al ambiente. Los proyectos de microservicios están configurados para poder agregar múltiples instancias sin importar que ya exista una del mismo tipo.
-        5- Gateway: Servidor Gateway que sirve de punto de acceso para los microservicios y de balanceador en caso de que haya más de una instancia del mismo tipo un microservicios
-        6- Biblioteca con clases genericas y comumes que se comparten entre los microservicios
+API Rest con los servicios para gestionar Clientes, Descuentos y Facturas
 
 Requisitos para su ejecución:
         
         1- Tener instaldo Java 11 o superior
         2- Tener acceso a un manejador de BD Postgres ya sea local o remota.
-        3.- Tener disponibles los puertos 8761 y 8090
+        3.- Tener disponibles los puertos 8080
 
 Configuración:
         
-        1- Descargar solución completa, los 6 componentes (3 microservicios, eureka, gateway y biblioteca commons/generic), todos los componentes deberán estárn en la misma carpeta
-        2- Ingresar a la carpeta "generics-microservicios" y ejecutar el comando ".\gradlew.bat jar" o ".\gradlew jar". Esto crear el Jar de la biblioteca, la cual será usada por los microservicios
-        3- Los microservicios clientes (carpeta microservicios-clientes), facturas (carpeta facturas) y descuentos (carpeta descuentos) vienen configurados para usar una BD Postrgres de forma local, esto se puede modificar en los archivos "application-dev.properties", archivo que se ubica src/main/resources
-        4- En caso de usar la configuración establecida, asegurese de que en dicha BD existan las bases de datos "db_microservicios_usuarios" con los esquemas "clientes" y "descuentos" y la base de datos "db_microservicios_facturas" con el esquema "facturas"
-        5- Los microservicios vienen configurados para crear la estructura de la BD así como sus reglas de integridad (primary keys, constraints, etc)
-        6- Para crear los JARs de ejecución se debe entrar a cada uno de los modulos (3 microservicios, eureka y gateway) y construir los ejecutables con el comando de gradle ".\gradlew.bat clean build -x:test" o ".\gradlew clean build -x:test" 
-        7- Los JARs se encontrarán en los subdirectorios "build\libs" de cada modulo, habrá 2, ejecutar el de mayor peso (el que NO termina en ...plain.jar) con el comando "java -jar eureka-0.0.1-SNAPSHOT.jar" (Ejemplo de módulo eureka). Siguiendo el orden del paso siguiente.
-        8- El orden de ejecución es de el siguiente: 1 - eureka, 2 - microservicio clientes, 3 - microservicio descuentos, 4 - microservicio factuas y 5 - gateway
-        9- Por último, ejecute los archivos SQL en la BD correspondiente de acuerdo a su nombre, esto con la finalidad de contar con algunos registros de prueba y sobre todo llenar los catalogos que son necesarios
+        1- Ingresa la configuración de tu BD en el archivo src\main\resources\application-dev.properties, deberas ingresar IP, nombre base de datos, usuario y contraseña
+        2.- Usa el script "Crear BD.sql" para crear los esquemas y tablas dentro de la BD
+        3.- Usa el script "Llenado BD.sql" para crear los catalogos y algunos registros. También para tener los descuentos planteados en el Challenge
+        4.- Para arrancar la aplicación usa el comando: En Windows es ".\gradlew.bat clean build bootRun -x:test" y en Linux ".\gradlew clean build bootRun -x:test"
        
-Una vez que todos los componentes estén en ejecución podrá lanzar peticiones HTTP a través de la utilería de Swagger, la ruta es http://localhost:8090/swagger-ui/index.html
+Una vez que la aplicación esté en ejecución podrá lanzar peticiones HTTP a través de la utilería de Swagger, la ruta es "http://localhost:8080/swagger-ui/index.html?configUrl=/api-docs/swagger-config"

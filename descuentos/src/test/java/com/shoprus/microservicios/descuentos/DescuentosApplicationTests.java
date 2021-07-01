@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.shoprus.microservicios.clientes.controllers.DescuentoController;
 import com.shoprus.microservicios.commons.controllers.dtos.ArticuloCarritoDTO;
 import com.shoprus.microservicios.commons.controllers.dtos.DescuentoDTO;
 import com.shoprus.microservicios.commons.controllers.dtos.SolicitudCompraDTO;
-import com.shoprus.microservicios.descuentos.controllers.DescuentoController;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

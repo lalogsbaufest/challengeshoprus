@@ -152,4 +152,6 @@ gradle-app.setting
 ### XML ###
 src/main/resources/xml/
 
+workspace.code-workspace
+
 # End of https://www.gitignore.io/api/java,gradle,eclipse,java-web
